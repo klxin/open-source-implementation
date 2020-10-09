@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div class="box">
+      <input type="text" placeholder="请输入姓名" class="name" />
+      <input type="text" placeholder="请输入性别" class="sex" />
+      <input type="text" placeholder="请输入年龄" class="age" />
+      <button>提交</button>
+    </div>
+    <table border="1" width="600" style="margin-top: 20px">
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th>性别</th>
+          <th>年龄</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- var item = {
+       id : +new Date(),
+       name : name,
+       sex : sex,
+       age : age
+       } -->
+        <!-- <tr>
+          <td>${item.name}</td>
+          <td>${item.sex}</td>
+          <td>${item.age}</td>
+          <td><a href="javascript:;" data-id="${item.id}">删除</a></td>
+        </tr> -->
+      </tbody>
+    </table>
+
+    <script>
+      var arr =JSON.parse(localStorage.getItem('items')|| '[]')
+      for (var i = 0;i< arr.length; i++) {
+        var item = arr[i]
+        var $tr = $(`<tr>
+         <td>${item.name}</td>
+         <td>${item.sex}</td>
+         <td>${item.age}</td>
+         <td><a href="javascript:;" data-id="${item.id}">删除</a></td>
+       </tr>`);
+       $('tbody').append($tr)
+      }
+
+      $('tbody').on('click','a',function() {
+        $(this).parents('tr').remove()
+        var id = $(this).data('id')
+        for (var i = 0;i< arr.length; i++) {
+          if (arr[i].id === id) {
+            arr.splice(i,1)
+            localStorage.setItem('items',JSON.stringify(arr))
+          }
+        }
+      })
+      $('button').click(function () {
+        var name = $('.name').val();
+        var sex = $('.sex').val();
+        var age = $('.age').val();
+        if (name.length === 0 || sex.length === 0 || age.length === 0) return alert('11');
+        var item = {
+          id: +new Date(),
+          name: name,
+          sex: sex,
+          age: age,
+        };
+        var $tr = $(`<tr>
+         <td>${item.name}</td>
+         <td>${item.sex}</td>
+         <td>${item.age}</td>
+         <td><a href="javascript:;" data-id="${item.id}">删除</a></td>
+       </tr>`);
+       $('tbody').append($tr)
+       arr.push(item)
+       localStorage.setItem('items',JSON.stringify(arr))
+      });
+
+      // var arr = JSON.parse(localStorage.getItem('items') || '[]')
+      // for (var i =0; i < arr.length; i++) {
+      //   var item = arr[i]
+      //   var $tr = $(`<tr>
+      //     <td>${item.name}</td>
+      //     <td>${item.sex}</td>
+      //     <td>${item.age}</td>
+      //     <td><a href="javascript:;" data-id="${item.id}">删除</a></td>
+      //   </tr>`)
+      //   $('tbody').append($tr)
+      // }
+
+      // $('tbody').on('click','a',function() {
+      //   $(this).parents('tr').remove()
+      //   var id = $(this).data('id')
+      //   for (var i = 0; i < arr.length; i++) {
+      //     if (arr[i].id === id) {
+      //       arr.splice(i,1)
+      //       localStorage.setItem('items', JSON.stringify(arr))
+      //     }
+      //   }
+      // })
+
+      // $('button').click(function () {
+      //   var name = $('.name').val()
+      //   var sex = $('.sex').val()
+      //   var age = $('.age').val()
+      //   if (name.length === 0 || sex.length === 0 || age.length === 0) return alert(11)
+      //   var item = {
+      //     id: +new Date(),
+      //     name: name,
+      //     sex: sex,
+      //     age: age
+      //   }
+      //   var $tr = $(`<tr>
+      //     <td>${item.name}</td>
+      //     <td>${item.sex}</td>
+      //     <td>${item.age}</td>
+      //     <td><a href="javascript:;" data-id="${item.id}">删除</a></td>
+      //   </tr>`)
+      //   $('tbody').append($tr)
+      //   arr.push(item)
+      //   localStorage.setItem('items',JSON.stringify(arr))
+
+      // })
+    </script>
+  </body>
+</html>
