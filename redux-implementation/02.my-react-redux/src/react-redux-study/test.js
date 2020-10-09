@@ -1,6 +1,7 @@
 import React from 'react'
 // 引入react-redux
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
+import { connect } from '../myredux-implementation/my-react-redux'
 import { add, asyncAdd } from './countReducer'
 // 定义测试react-redux组件
 class Test extends React.Component {

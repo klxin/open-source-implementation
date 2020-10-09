@@ -6,7 +6,6 @@
 export function createStore(reducer) {
   let currentState = {}
   let currentListeners = []
-  let flag = true
   function getState() {
     // 获取store中的状态值
     return currentState
@@ -19,8 +18,7 @@ export function createStore(reducer) {
     }
   }
   function dispatch(action) {
-    currentState = reducer(flag ? null : currentState, action)
-    flag = false
+    currentState = reducer(currentState, action)
     // 订阅者更新 执行subscribe中的回调
     currentListeners.forEach((cb) => cb())
     return action
@@ -29,4 +27,3 @@ export function createStore(reducer) {
   dispatch({ type: '@@redux/INIT' })
   return { getState, subscribe, dispatch }
 }
-

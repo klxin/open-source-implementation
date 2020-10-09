@@ -7,7 +7,7 @@ export function countReducer (state = 0, action) {
     case DECREMENT:
       return state - 1
     default:
-      return state
+      return 10
   }
 }
 
