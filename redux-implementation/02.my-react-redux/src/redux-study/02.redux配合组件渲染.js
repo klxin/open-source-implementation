@@ -1,5 +1,6 @@
 // redux 一个专业的状态管理工具 可以搭配react anguler vue等任意框架使用
-import { createStore } from 'redux'
+// import { createStore } from 'redux'
+import { createStore } from '../myredux-implementation/my-redux'
 import React from 'react'
 // 定义常量便于管理
 const ADD_COUNT = 'ADD_COUNT'
